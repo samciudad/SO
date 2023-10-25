@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!--Tailwind CDN-->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!--Tailwind Customized Configuration-->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              body: "#abc6F9",
+              main: "#ffffff",
+              header: "#4991fc",
+            },
+          },
+        },
+      };
+    </script>
+
+    <!--Tailwind Custom CSS Features-->
+    <style type="text/tailwindcss">
+      @layer utilities {
+        .content-auto {
+          content-visibility: auto;
+        }
+        .main {
+          max-width: 1024px;
+          display: flex;
+          margin-right: auto;
+          margin-left: auto;
+        }
+        .logo {
+          width: 100px;
+          height: 100px;
+        }
+        .header {
+          margin-top: 16px;
+        }
+        .form-title {
+          display: flex;
+          justify-content: center;
+        }
+        .personal-data-section {
+          max-width: 900px;
+          margin: 0 auto;
+          display: flex;
+          justify-content: space-between;
+          gap: 0 1rem;
+        }
+        .preliminary-education-section {
+          max-width: 900px;
+          margin: 0 auto;
+        }
+        .legend-section {
+          max-width: 900px;
+          margin: 0 auto;
+        }
+        #legend ol li {
+          margin-left: 1.25rem;
+        }
+        .certification-name[contenteditable]:empty::before {
+          content: "NICOLE C. PRESINCULA";
+          color: #cbd5e1;
+        }
+      }
+    </style>
+
+    <!--CSS of the table-->
+    <style>
+      table {
+        border-collapse: collapse;
+        width: 100%;
+      }
+
+      table,
+      th,
+      td {
+        border: 1px solid rgb(203 213 225);
+      }
+
+      th,
+      td {
+        padding: 5px;
+        text-align: center;
+      }
+
+      th {
+        background-color: #f9fafb;
+      }
+
+      td[contenteditable="true"] {
+        cursor: text;
+      }
+
+      .print-button {
+        display: block;
+        margin-top: 20px;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      /* css ng table sa fillup */
+
+      .form-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+      }
+
+      .form-table,
+      .form-table th,
+      .form-table td {
+        border: 1px solid #000;
+        text-align: left;
+      }
+
+      .form-table th,
+      .form-table td {
+        padding: 8px;
+        text-align: left;
+      }
+
+      .form-table input[type="text"],
+      .form-table input[type="date"] {
+        width: 200px, 100%;
+        padding: 4px;
+      }
+
+      @media print {
+        * {
+          background: transparent !important;
+          color: #000 !important;
+          box-shadow: none !important;
+          text-shadow: none !important;
+        }
+        main {
+          width: 100%;
+        }
+        input {
+          border: none !important;
+        }
+        .print-button {
+          display: none;
+        }
+        table {
+          page-break-inside: avoid;
+        }
+        .certification-name {
+          background: none;
+          border: none;
+        }
+        @page {
+          size: legal portrait;
+          margin: 0.8in 0.3in;
+        }
+      }
+    </style>
+
+    <title>Editable Table</title>
+  </head>
+
+  <body class="bg-body">
+    <main
+      class="font-sans bg-main main mt-8 mb-8 rounded-xl drop-shadow-lg relative"
+    >
+      <!--Start of Header-->
+      <div class="w-full">
+        <header class="bg-header rounded-t-xl">
+          <div class="flex flex-col justify-center items-center print:flex-row">
+            <img class="logo mt-6" src="logo.png" alt="logo" />
+
+            <div
+              class="print:flex print:flex-col print:justify-center print:items-center"
+            >
+              <h1
+                class="text-white font-bold text-2xl md:text-3xl mb-6 print:text-black print:text-4xl print:font-medium print:mb-0 print:mt-3.5 print:ml-3"
+              >
+                OUR LADY OF LOURDES COLLEGE
+              </h1>
+              <p class="hidden print:block print:text-2xl">
+                5031 Gen. T. de Leon Valenzuela
+              </p>
+            </div>
+          </div>
+
+          <div class="form-title bg-white">
+            <h2
+              class="text-lg md:text-xl font-medium my-4 print:text-xl print:font-normal print:text-center"
+            >
+              Record of Candidate for Graduation
+            </h2>
+          </div>
+        </header>
+        <!--End of Header-->
+
+        <!--Start of Personal Data Section -->
+        <section class="w-full mb-4 print:mb-6">
+          <form class="personal-data-section">
+            <!--Start of 1st Column (Student Personal Data Section)-->
+            <div class="w-[425px] print:w-[800px]">
+              <div id="name" class="mb-3 print:mb-[-10px] print:flex">
+                <label
+                  class="block mb-2 text-sm font-medium text-gray-900 print:mt-2 print:text-base print:w-[250px]"
+                >
+                  Name:
+                </label>
+                <input
+                  class="block w-full p-1.5 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 uppercase print:text-lg font-medium"
+                  type="text"
+                  name="name"
+                  placeholder="PRESINCULA, NICOLE C."
+                  required
+                />
+              </div>
+
+              <div
+                id="birthdate"
+                class="mb-3 print:mb-[-10px] print:flex appearance-none"
+              >
+                <label
+                  class="block mb-2 text-sm font-medium text-gray-900 print:text-base print:mt-2 print:w-[250px]"
+                >
+                  Birthdate:
+                </label>
+                <input
+                  class="block w-full p-1.5 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 print:text-lg"
+                  type="text"
+                  name="birthdate"
+                  placeholder="October 25, 2000"
+                  required
+                />
+              </div>
+
+              <div id="entrance-data" class="mb-3 print:mb-[-10px] print:flex">
+                <label
+                  class="block mb-2 text-sm font-medium text-gray-900 print:text-base print:mt-2 print:text-base print:w-[250px]"
+                >
+                  Entrance Data:
+                </label>
+                <input
+                  class="block w-full p-1.5 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 print:text-lg"
+                  type="text"
+                  name="entranceData"
+                  placeholder="F-137"
+                  required
+                />
+              </div>
+
+              <div id="college-of" class="mb-3 print:mb-[-10px] print:flex">
+                <label
+                  class="block mb-2 text-sm font-medium text-gray-900 print:text-base print:mt-2 print:text-base print:w-[250px]"
+                >
+                  College of:
+                </label>
+                <input
+                  class="block w-full p-1.5 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 print:text-lg"
+                  type="text"
+                  name="college"
+                  placeholder="BSBA"
+                  required
+                />
+              </div>
+
+              <div
+                id="candidate-for-title"
+                class="mb-3 print:mb-[-10px] print:flex"
+              >
+                <label
+                  class="block mb-2 text-sm font-medium text-gray-900 print:text-base print:mt-2 print:text-base print:w-[250px]"
+                >
+                  Candidate for Title:
+                </label>
+                <input
+                  class="block w-full p-1.5 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 print:text-sm"
+                  type="text"
+                  name="candidateTitle"
+                  placeholder="Bachelor of Science in Business Administration"
+                  required
+                />
+              </div>
+
+              <div id="major" class="mb-3 print:mb-[-10px] print:flex">
+                <label
+                  class="block mb-2 text-sm font-medium text-gray-900 print:text-base print:mt-2 print:text-base print:w-[250px]"
+                >
+                  Major:
+                </label>
+                <input
+                  class="block w-full p-1.5 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 print:text-lg"
+                  type="text"
+                  name="major"
+                  placeholder="Operations Management"
+                  required
+                />
+              </div>
+
+              <div
+                id="date-of-graduation"
+                class="mb-3 print:mb-[-10px] print:flex"
+              >
+                <label
+                  class="block mb-2 text-sm font-medium text-gray-900 print:text-base print:mt-2 print:text-base print:w-[250px]"
+                >
+                  Date of Graduation:
+                </label>
+                <input
+                  class="block w-full p-1.5 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 print:text-lg"
+                  type="text"
+                  name="graduationDate"
+                  placeholder="June 24, 2024"
+                  required
+                />
+              </div>
+            </div>
+            <!--End of 1st Column (Student Personal Data Section)-->
+
+            <!--Start of 2nd Column (Student Personal Data Section)-->
+            <div class="w-[425px]">
+              <div id="sex" class="mb-3 print:mb-[-10px] print:flex">
+                <label
+                  for="small-input"
+                  class="block mb-2 text-sm font-medium text-gray-900 print:text-base print:mt-2 print:text-base print:w-[150px]"
+                >
+                  Sex:
+                </label>
+                <input
+                  class="text-sm block w-full p-1.5 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 print:text-lg"
+                  type="text"
+                  name="sex"
+                  placeholder="Female"
+                  required
+                />
+              </div>
+
+              <div id="birthplace" class="mb-40 print:mb-20 print:flex">
+                <label
+                  for="small-input"
+                  class="block mb-2 text-sm font-medium text-gray-900 print:text-base print:mt-2 print:text-base print:w-[150px]"
+                >
+                  Birthplace:
+                </label>
+                <input
+                  class="text-sm block w-full p-1.5 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 print:text-lg"
+                  type="text"
+                  name="birthplace"
+                  placeholder="Valenzuela"
+                  required
+                />
+              </div>
+
+              <div id="minor" class="mb-3 print:flex">
+                <label
+                  class="block mb-2 text-sm font-medium text-gray-900 print:text-base print:mt-2 print:text-base print:w-[150px]"
+                >
+                  Minor:
+                </label>
+                <input
+                  class="block w-full p-1.5 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 print:text-lg"
+                  type="text"
+                  name="minor"
+                  placeholder="xxx"
+                  required
+                />
+              </div>
+            </div>
+            <!--Start of 2nd Column (Student Personal Data Section)-->
+          </form>
+        </section>
+        <!--End of Personal Data Section -->
+
+        <!--Start of Preliminary Education Section-->
+        <section class="w-full mb-4">
+          <div class="preliminary-education-section">
+            <!--Start of Section Title-->
+            <div class="uppercase">
+              <h3
+                class="font-semibold text-sm text-gray-900 mb-3 print:mb-4 print:text-base"
+              >
+                Preliminary education
+              </h3>
+            </div>
+            <!--End of Section Title-->
+
+            <div class="flex justify-between text-sm">
+              <!--Start of 1st Column (Preliminary Education)-->
+              <div class="w-[250px] flex flex-col font-medium print:text-base">
+                <h4 class="mb-6 print:mb-4">Completed</h4>
+                <label class="mb-6 print:mb-3">Elementary:</label>
+                <label class="mb-6 print:mb-3">Junior High School:</label>
+                <label class="">Senior High School:</label>
+              </div>
+              <!--End of 1st Column (Preliminary Education)-->
+
+              <!--Start of 2nd Column (Preliminary Education)-->
+              <form
+                class="w-[450px] flex flex-col print:justify-around print:text-base"
+              >
+                <h4
+                  class="mb-3 font-medium print:mb-4 text-center print:text-left"
+                >
+                  Name of School
+                </h4>
+                <input
+                  class="p-1.5 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 mb-3 print:mt-[-10px]"
+                  type="text"
+                  name="elementarySchool"
+                  placeholder="Caruhatan East Elementary School"
+                  required
+                />
+                <input
+                  class="p-1.5 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 mb-3 print:mt-[-10px]"
+                  type="text"
+                  name="juniorHighSchool"
+                  placeholder="Parada National High School"
+                  required
+                />
+                <input
+                  class="p-1.5 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 mb-3 print:mt-[-10px]"
+                  type="text"
+                  name="seniorHighSchool"
+                  placeholder="Parada National High School"
+                  required
+                />
+              </form>
+              <!--End of 2nd Column (Preliminary Education)-->
+
+              <!--Start of 3rd Column (Preliminary Education)-->
+              <form class="w-[100px] flex flex-col print:text-base">
+                <h4
+                  class="mb-3 font-medium text-center print:mb-4 print:text-left"
+                >
+                  Year
+                </h4>
+                <input
+                  class="p-1.5 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 mb-3 print:mt-[-10px]"
+                  type="number"
+                  name="elementaryYear"
+                  placeholder="2013"
+                  required
+                />
+                <input
+                  class="p-1.5 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 mb-3 print:mt-[-10px]"
+                  type="number"
+                  name="juniorHighYear"
+                  placeholder="2017"
+                  required
+                />
+                <input
+                  class="p-1.5 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 mb-3 print:mt-[-10px]"
+                  type="number"
+                  name="seniorHighYear"
+                  placeholder="2018"
+                  required
+                />
+              </form>
+              <!--End of 3rd Column (Preliminary Education)-->
+            </div>
+          </div>
+        </section>
+        <!--End of Preliminary Education Section-->
+
+        <!--Start of table-->
+        <section class="w-full mb-4 print:mb-8">
+          <div class="max-w-[900px] mx-auto overflow-x-auto">
+            <table class="text-sm">
+              <thead>
+                <tr>
+                  <th>SUBJECTS</th>
+                  <th>FINAL GRADES</th>
+                  <th>1</th>
+                  <th>2</th>
+                  <th>3</th>
+                  <th>4</th>
+                  <th>5</th>
+                  <th>6</th>
+                  <th>7</th>
+                  <th>8</th>
+                  <th>9</th>
+                  <th>10</th>
+                  <th>11</th>
+                  <th>12</th>
+                  <th>Re-Exam</th>
+                  <th>UNITS</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr>
+                  <td colspan="16" class="text-left pl-4 font-medium">
+                    FIRST SEMESTER SY 2019-2020
+                  </td>
+                </tr>
+              </tbody>
+
+              <tbody>
+                <tr>
+                  <td>
+                    <select id="subjectSelect">
+                      <option value="Understanding The Self">
+                        Understanding The Self
+                      </option>
+                      <option value="Reading in Philippine History">
+                        Reading in Philippine History
+                      </option>
+                      <option value="The Contemporary World">
+                        The Contemporary World
+                      </option>
+                      <option value="Mathematics in the modern world">
+                        Mathematics in the modern world
+                      </option>
+                      <option value="Basic Microeconomics">
+                        Basic Microeconomics
+                      </option>
+                      <option value="Physical Fitness and Gymnastics">
+                        Physical Fitness and Gymnastics
+                      </option>
+                      <option value="National Service Training Program">
+                        National Service Training Program
+                      </option>
+                      <option value="OLLC Culture and Ethics 1">
+                        OLLC Culture and Ethics 1
+                      </option>
+                      <option value="Operations Management">
+                        Operations Management
+                      </option>
+                      <option value="Environmental Management System">
+                        Environmental Management System
+                      </option>
+                      <option value="Art Appreciation">Art Appreciation</option>
+                      <option value="Science, Technology & Society">
+                        Science, Technology & Society
+                      </option>
+                      <option value="Ethics">Ethics</option>
+                      <option value="Rhythmic Activities">
+                        Rhythmic Activities
+                      </option>
+                      <option value="Nat'l Service Training Program 2">
+                        Nat'l Service Training Program 2
+                      </option>
+                      <option value="OLLC Culture & Ethics 2">
+                        OLLC Culture & Ethics 2
+                      </option>
+
+                      <!-- Kung marami pang option (kase option ka lang nya :<) - inalis ko closing ng comment tag here :) -->
+                    </select>
+                  </td>
+                  <td contenteditable="true"></td>
+                  <td contenteditable="true"></td>
+                  <td contenteditable="true"></td>
+                  <td contenteditable="true"></td>
+                  <td contenteditable="true"></td>
+                  <td contenteditable="true"></td>
+                  <td contenteditable="true"></td>
+                  <td contenteditable="true"></td>
+                  <td contenteditable="true"></td>
+                  <td contenteditable="true"></td>
+                  <td contenteditable="true"></td>
+                  <td contenteditable="true"></td>
+                  <td contenteditable="true"></td>
+                  <td contenteditable="true"></td>
+                  <td contenteditable="true"></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+        <!--End of table-->
+
+        <!--Start of Table Buttons -->
+        <section class="w-full mb-4 print-button">
+          <div class="max-w-[900px] mx-auto">
+            <div class="flex justify-center gap-x-12">
+              <!--Start of Add Subject Button-->
+              <div
+                class="bg-body p-2 w-32 rounded-lg drop-shadow-lg transition duration-300 ease-in-out hover:scale-105"
+              >
+                <button
+                  class="flex items-center gap-x-1 mx-auto"
+                  type="button"
+                  onclick="addSubject()"
+                >
+                  <img class="w-[18px]" src="add.png" alt="/" />
+                  <p class="text-sm font-medium">Add Subject</p>
+                </button>
+              </div>
+              <!--End of Add Subject Button-->
+
+              <!--Start of Add Semester&Year Button-->
+              <div
+                class="flex drop-shadow-lg transition duration-300 ease-in-out hover:scale-105"
+              >
+                <div class="bg-body p-2 w-32 rounded-l-lg">
+                  <button
+                    class="flex items-center gap-x-1 mx-auto"
+                    type="button"
+                    onclick="addSemester()"
+                  >
+                    <img class="w-[18px]" src="add.png" alt="/" />
+                    <p class="text-sm font-medium">Add Semester</p>
+                  </button>
+                </div>
+
+                <input
+                  class="p-1.5 text-sm text-gray-900 border border-gray-300 rounded-r-lg bg-gray-50"
+                  type="text"
+                  id="semesterYear"
+                  placeholder="Enter Semester and Year"
+                />
+              </div>
+              <!--End of Add Semester&Year Button-->
+            </div>
+          </div>
+        </section>
+        <!--End of Table Buttons -->
+
+        <!--Start of Legend Section-->
+        <section class="w-full mb-16">
+          <div class="legend-section text-sm print:text-base">
+            <h4 class="text-center mb-3 font-medium uppercase">Legend</h4>
+
+            <div id="legend" class="w-[600px] mx-auto">
+              <ol
+                class="list-decimal grid grid-cols-3 grid-rows-4 auto-cols-fr"
+              >
+                <li class="row-start-1">Language</li>
+                <li class="row-start-2">Social Science</li>
+                <li class="row-start-3">Logic</li>
+                <li class="row-start-4">Rizal Course</li>
+                <li>Natural Science</li>
+                <li class="col-start 2 row-start-2">Taxation</li>
+                <li class="col-start 2 row-start-3">Law</li>
+                <li class="col-start 2 row-start-4">Mathematics</li>
+                <li class="ml-4">Core</li>
+                <li>Business</li>
+                <li>Physical Education</li>
+                <li>Military Science</li>
+              </ol>
+            </div>
+          </div>
+        </section>
+        <!--End of Legend Section-->
+
+        <!--Start of Certification Section-->
+        <section class="w-full mb-12">
+          <div class="max-w-[900px] mx-auto text-sm print:text-base">
+            <h4 class="uppercase font-medium text-center mb-4">
+              Certification
+            </h4>
+
+            <p class="indent-20 leading-8 text-justify mb-16">
+              I hereby certify that the foregoing records of
+              <span
+                class="certification-name px-2 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-center uppercase font-medium"
+                role="textbox"
+                contenteditable
+              ></span>
+              candidate for graduation have been verified by me that the true
+              copies substantiating the same are kept in the files of our
+              College.
+            </p>
+
+            <div class="text-center">
+              <p class="uppercase">Maria Grecilia C. Decilio</p>
+              <p>Registrar</p>
+            </div>
+          </div>
+        </section>
+        <!--End of Certification Section-->
+
+        <!-- Start of Print Button-->
+        <div class="print-button absolute">
+          <div class="fixed right-[-165px] top-[50px]">
+            <button
+              class="bg-main p-0.5 w-16 h-16 rounded-full flex flex-col drop-shadow-lg transition duration-300 ease-in-out hover:scale-105"
+              type="button"
+              onclick="window.print()"
+            >
+              <div class="flex flex-col justify-center mx-auto my-auto">
+                <img class="w-[30px]" src="printer.png" alt="/" />
+                <p class="text-xs font-medium">Print</p>
+              </div>
+            </button>
+          </div>
+        </div>
+        <!--End of Print Button-->
+      </div>
+    </main>
+
+    <script>
+      function updateTable() {
+        const subjectSelect = document.getElementById("subjectSelect");
+        const selectedSubject = subjectSelect.value;
+        const table = document.querySelector("table tbody");
+
+        // Clear existing rows except for the header row
+        while (table.rows.length > 1) {
+          table.deleteRow(1);
+        }
+
+        // Populate the table with the selected subject
+        const newRow = table.insertRow(1);
+        const cell1 = newRow.insertCell(0);
+        cell1.textContent = selectedSubject;
+
+        // saang column mag x
+        const columnIndices = {
+          "Understanding The Self": 3,
+          "Reading in Philippine History": 3,
+          "The Contemporary World": 3,
+          "Mathematics in the modern world": 9,
+          "Basic Microeconomics": 3,
+          "Physical Fitness and Gymnastics": 12,
+          "National Service Training Program": 13,
+          "OLLC Culture and Ethics 1": 3,
+          "Operations Management": 10,
+          "Environmental Management System": 3,
+          "Art Appreciation": 3,
+          "Science, Technology & Society": 3,
+        "Ethics": 3,
+          "Rhythmic Activities": 12,
+          "Nat'l Service Training Program 2": 13,
+          "OLLC Culture & Ethics 2": 3,
+          "Purposive Communication": 2,
+        "Great Books": 3, 
+        "Philippine popular Culture": 3,
+        "Rizal's Works and Writings": 5, 
+        "Business Law ( Obligations and Contracts)": 7,
+        "Income Taxation": 8,
+        "Sining ng Komunikasyon": 2,
+        "Individual Dual Sports and Games": 12,
+        };
+
+        for (let i = 1; i <= 15; i++) {
+          const cell = newRow.insertCell(i);
+          cell.contentEditable = "true";
+          cell.textContent = columnIndices[selectedSubject] === i ? "X" : "";
+        }
+      
+         // Set the units in the "UNITS" column based on the selected subject
+      const unitsCell = newRow.cells[15]; // Units column
+      unitsCell.textContent = calculateUnits(selectedSubject);
+    }
+
+    function calculateUnits(subject) {
+      const unitsMap = {
+        "Understanding The Self": 3,
+        "Reading in Philippine History": 3,
+        "The Contemporary World": 3,
+        "Mathematics in the modern world": 3,
+        "Basic Microeconomics": 3,
+        "Physical Fitness and Gymnastics": 2, 
+        "National Service Training Program": 3,
+        "OLLC Culture and Ethics 1": 2,
+        "Operations Management": 3,
+        "Environmental Management System": 3,
+        "Art Appreciation": 3,
+        "Science, Technology & Society": 3,
+        "Ethics": 3,
+        "Rhythmic Activities": 2,
+        "Nat'l Service Training Program 2": 3,
+        "OLLC Culture & Ethics 2": 2,
+        "Purposive Communication": 3,
+        "Great Books": 3, 
+        "Philippine popular Culture": 3,
+        "Rizal's Works and Writings": 3, 
+        "Business Law ( Obligations and Contracts)": 3,
+        "Income Taxation": 3,
+        "Sining ng Komunikasyon": 3,
+        "Individual Dual Sports and Games": 2,
+   
+
+        // Add more sub tas units kung ilan
+      };
+
+      return unitsMap[subject] || "";
+    }
+
+
+      function addSubject() {
+        const subjectSelect = document.getElementById("subjectSelect");
+        const selectedSubject = subjectSelect.value;
+        const table = document.querySelector("table tbody");
+
+        // new riw
+        const newRow = table.insertRow(-1); // -1 inserts at the end
+        const cell1 = newRow.insertCell(0);
+        cell1.innerHTML = `
+      <select onchange="updateSubject(this)">
+        <option value="Understanding The Self">Understanding The Self</option>
+        <option value="Reading in Philippine History">Reading in Philippine History</option>
+        <option value="The Contemporary World">The Contemporary World</option>
+        <option value="Mathematics in the modern world">Mathematics in the modern world</option>
+        <option value="Basic Microeconomics">Basic Microeconomics</option>
+        <option value="Physical Fitness and Gymnastics">Physical Fitness and Gymnastics</option>
+        <option value="National Service Training Program">National Service Training Program</option>
+        <option value="OLLC Culture and Ethics 1">OLLC Culture and Ethics 1</option>
+        <option value="Operations Management">Operations Management</option>
+          <option value="Environmental Management System">Environmental Management System</option>
+          <option value="Art Appreciation">Art Appreciation</option>
+          <option value="Science, Technology & Society">Science, Technology & Society</option>
+          <option value="Ethics">Ethics</option>
+          <option value="Rhythmic Activities">Rhythmic Activities</option>
+          <option value="Nat'l Service Training Program 2">Nat'l Service Training Program 2</option>
+          <option value="OLLC Culture & Ethics 2">OLLC Culture & Ethics 2</option>
+        <!-- Add more options as needed -->
+      </select>
+    `;
+        // subject sa dropdown
+        cell1.querySelector("select").value = selectedSubject;
+
+        // column ulit saan lagay x
+        const columnIndices = {
+          "Understanding The Self": 3,
+          "Reading in Philippine History": 3,
+          "The Contemporary World": 3,
+          "Mathematics in the modern world": 9,
+          "Basic Microeconomics": 3,
+          "Physical Fitness and Gymnastics": 12,
+          "National Service Training Program": 13,
+          "OLLC Culture and Ethics 1": 3,
+          "Operations Management": 10,
+          "Environmental Management System": 3,
+          "Art Appreciation": 3,
+          "Science, Technology & Society": 3,
+        "Ethics": 3,
+          "Rhythmic Activities": 12,
+          "Nat'l Service Training Program 2": 13,
+          "OLLC Culture & Ethics 2": 3,
+          "Purposive Communication": 2,
+        "Great Books": 3, 
+        "Philippine popular Culture": 3,
+        "Rizal's Works and Writings": 5, 
+        "Business Law ( Obligations and Contracts)": 7,
+        "Income Taxation": 8,
+        "Sining ng Komunikasyon": 2,
+        "Individual Dual Sports and Games": 12,
+        };
+
+        // formula kay x
+        for (let i = 1; i <= 15; i++) {
+          const cell = newRow.insertCell(i);
+          cell.contentEditable = "true";
+          cell.textContent = columnIndices[selectedSubject] === i ? "X" : "";
+        }
+
+       // Set the units in the "UNITS" column based on the selected subject
+       const unitsCell = newRow.cells[15]; // Units column
+      unitsCell.textContent = calculateUnits(selectedSubject);
+    }
+
+      function updateSubject(selectElement) {
+        const selectedSubject = selectElement.value;
+        const table = selectElement.closest("table");
+
+        // Update the subject name in the same row
+        const cell1 = selectElement.parentElement;
+        cell1.textContent = selectedSubject;
+
+         // Set the units in the "UNITS" column based on the selected subject
+      const unitsCell = cell1.parentElement.cells[15]; // Units column
+      unitsCell.textContent = calculateUnits(selectedSubject);
+    }
+
+
+      function addSemester() {
+        const semesterYearInput = document.getElementById("semesterYear");
+        const semesterYear = semesterYearInput.value;
+
+        if (semesterYear.trim() === "") {
+          alert("Please enter a semester and year.");
+          return;
+        }
+
+        // new sem
+        const table = document.querySelector("table tbody");
+        const newRow = table.insertRow(-1);
+        const cell = newRow.insertCell(0);
+        cell.colSpan = 16; // Span all columns
+        cell.style.fontWeight = "500";
+        cell.style.textAlign = "left";
+        cell.style.paddingLeft = "16px";
+        cell.style.textTransform = "uppercase";
+        cell.textContent = semesterYear;
+
+        // clear sem
+        semesterYearInput.value = "";
+      }
+    </script>
+  </body>
+</html>
